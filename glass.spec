@@ -2,13 +2,14 @@ Summary:	GLASS - openGL Articulated Structure System
 Summary(pl):	GLASS - Biblioteka obs³ugi struktur 3D OpenGL
 Name:		glass
 Version:	1.3.1
-Release:	1
+Release:	2
 License:	GPL
 Group:		X11/Libraries
 Vendor:		Robert Cleaver Ancell <bob27@users.sourceforge.net>
 Source0:	http://dl.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
 # Source0-md5:	bcde18e3ce0bebb19cf888d652f8b425
 Patch0:		%{name}-LIBS.patch
+Patch1:		%{name}-DESTDIR.patch
 BuildRequires:	OpenGL-devel
 Requires:	OpenGL
 URL:		http://glass.sourceforge.net/
@@ -34,7 +35,7 @@ wywo³añ (co upraszcza kod).
 %package devel
 Summary:	GLASS development package
 Summary(pl):	Pakiet dla programistów GLASS
-Group:		Development/Building
+Group:		X11/Development/Libraries
 Requires:	%{name} = %{version}
 
 %description devel
@@ -46,22 +47,24 @@ Pliki nag³ówkowe biblioteki GLASS.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 %{__make} all \
-	CFLAGS="%{rpmcflags} -fPIC -I/usr/X11R6/include -DVERSION_STRING=\"\\\"%{version}\"\\\"" \
-	LIBS="-L/usr/X11R6/lib -lGL" \
-	CC=%{__cc}
+	CC="%{__cc}" \
+	CFLAGS="%{rpmcflags} -fPIC -Wall -I/usr/X11R6/include -DVERSION_STRING=\"\\\"%{version}\"\\\"" \
+	LIBS="-L/usr/X11R6/%{_lib} -lGL"
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_includedir},%{_libdir},%{_examplesdir}/%{name}}
+install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
-install src/glass.h $RPM_BUILD_ROOT%{_includedir}
-install libglass.so* $RPM_BUILD_ROOT%{_libdir}
+%{__make} install \
+	DESTDIR=$RPM_BUILD_ROOT \
+	INCLUDEDIR=%{_includedir}/glass \
+	LIBDIR=%{_libdir}
 
-ln -s libglass.so.%{version} $RPM_BUILD_ROOT%{_libdir}/libglass.so
-cp -ar examples/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}
+cp -ar examples/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -71,12 +74,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc README TODO
+%doc ChangeLog README TODO
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
 
 %files devel
 %defattr(644,root,root,755)
-%doc docs/* ChangeLog
+%doc docs/*.html
 %attr(755,root,root) %{_libdir}/lib*.so
-%{_includedir}/*
-%{_examplesdir}/%{name}
+%{_includedir}/glass
+%{_examplesdir}/%{name}-%{version}
