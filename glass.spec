@@ -15,6 +15,7 @@ Group(uk):	Б╕бл╕отеки
 Vendor:		Robert Cleaver Ancell <bob27@users.sourceforge.net>
 Source0:	ftp://ftp.sourceforge.net/pub/sourceforge/%{name}/%{name}-%{version}.tar.gz
 Patch0:		%{name}-version.patch
+Patch1:		%{name}-examples-CFLAGS_for_glut.patch
 URL:		http://glass.sourceforge.net/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -59,6 +60,7 @@ Group(pt_BR):	Desenvolvimento
 Group(ru):	Разработка
 Group(uk):	Розробка
 Requires:	%{name}-devel
+Requires:	glut-devel
 
 %description examples
 Sampe GLASS models to show howto use GLASS library.
@@ -68,7 +70,8 @@ PrzykЁadowe modele GLASS pokazuj╠ce stosowanie biblioteki GLASS.
 
 %prep
 %setup -q
-%patch -p1
+%patch0 -p1
+%patch1 -p1
 
 %build
 %{__make} all
