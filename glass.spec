@@ -6,7 +6,7 @@ Release:	1
 License:	GPL
 Group:		X11/Libraries
 Vendor:		Robert Cleaver Ancell <bob27@users.sourceforge.net>
-Source0:	ftp://ftp.sourceforge.net/pub/sourceforge/%{name}/%{name}-%{version}.tar.gz
+Source0:	http://dl.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
 Patch0:		%{name}-version.patch
 Patch1:		%{name}-examples-CFLAGS_for_glut.patch
 Patch2:		%{name}-LIBS.patch
