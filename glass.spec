@@ -5,13 +5,6 @@ Version:	1.1.3
 Release:	1
 License:	GPL
 Group:		X11/Libraries
-Group(de):	X11/Libraries
-Group(es):	X11/Bibliotecas
-Group(fr):	X11/Librairies
-Group(pl):	X11/Biblioteki
-Group(pt_BR):	X11/Bibliotecas
-Group(ru):	X11/‚…¬Ã…œ‘≈À…
-Group(uk):	X11/‚¶¬Ã¶œ‘≈À…
 Vendor:		Robert Cleaver Ancell <bob27@users.sourceforge.net>
 Source0:	ftp://ftp.sourceforge.net/pub/sourceforge/%{name}/%{name}-%{version}.tar.gz
 Patch0:		%{name}-version.patch
@@ -45,8 +38,6 @@ wywo≥aÒ (co upraszcza kod).
 Summary:	GLASS development package
 Summary(pl):	Pakiet dla programistÛw GLASS
 Group:		Development/Building
-Group(de):	Entwicklung/Bauen
-Group(pl):	Programowanie/Budowanie
 Requires:	%{name} = %{version}
 
 %description devel
