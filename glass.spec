@@ -55,7 +55,7 @@ Pliki nag³ówkowe biblioteki GLASS.
 
 %build
 %{__make} all \
-	CFLAGS="%{rpmcflags} -I/usr/X11R6/include -DVERSION_STRING=\"%{version}\"" \
+	CFLAGS="%{rpmcflags} -fPIC -I/usr/X11R6/include -DVERSION_STRING=\"%{version}\"" \
 	CC=%{__cc}
 
 %install
