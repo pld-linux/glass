@@ -7,6 +7,7 @@ License:	GPL
 Group:		X11/Libraries
 Vendor:		Robert Cleaver Ancell <bob27@users.sourceforge.net>
 Source0:	http://dl.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
+# Source0-md5:	bcde18e3ce0bebb19cf888d652f8b425
 Patch0:		%{name}-LIBS.patch
 BuildRequires:	OpenGL-devel
 Requires:	OpenGL
