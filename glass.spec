@@ -36,21 +36,35 @@ wywo≥aÒ (co upraszcza kod).
 %package devel
 Summary:	GLASS development package
 Summary(pl):	Pakiet dla programistÛw GLASS
-Group:		Development/Libraries
-Group(de):	Entwicklung/Libraries
-Group(es):	Desarrollo/Bibliotecas
-Group(fr):	Development/Librairies
-Group(pl):	Programowanie/Biblioteki
-Group(pt_BR):	Desenvolvimento/Bibliotecas
-Group(ru):	Ú¡⁄“¡¬œ‘À¡/‚…¬Ã…œ‘≈À…
-Group(uk):	Úœ⁄“œ¬À¡/‚¶¬Ã¶œ‘≈À…
+Group:		Development/Building
+Group(de):	Entwicklung/Bauen
+Group(pl):	Programowanie/Budowanie
 Requires:	%{name} = %{version}
 
 %description devel
-GLASS header files.
+GLASS header files. Contains also tutorial and specifications.
 
 %description devel -l pl
 Pliki nag≥Ûwkowe biblioteki GLASS.
+
+
+%package examples
+Summary:	Examples of GLASS models.
+Summary(pl):	Przyk≥adowe modele GLASS
+Group:		Development
+Group(de):	Entwicklung
+Group(es):	Desarrollo
+Group(pl):	Programowanie
+Group(pt_BR):	Desenvolvimento
+Group(ru):	Ú¡⁄“¡¬œ‘À¡
+Group(uk):	Úœ⁄“œ¬À¡
+Requires:	%{name}-devel
+
+%description examples
+Sampe GLASS models to show howto use GLASS library.
+
+%description examples -l pl
+Przyk≥adowe modele GLASS pokazuj±ce stosowanie biblioteki GLASS.
 
 %prep
 %setup -q
@@ -66,7 +80,11 @@ install -d $RPM_BUILD_ROOT{%{_includedir},%{_libdir}}
 install src/glass.h src/glass_types.h $RPM_BUILD_ROOT%{_includedir}
 install libglass.so* $RPM_BUILD_ROOT%{_libdir}
 
-gzip -9nf README TODO
+gzip -9nf README TODO ChangeLog
+
+cd $RPM_BUILD_ROOT%{_libdir}
+ln -s libglass.so.%{version} libglass.so
+ln -s libglass.so.%{version} libglass.so.1
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -78,8 +96,15 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc README.gz TODO.gz
 %attr(755,root,root) %{_libdir}/*.so.*.*
+%{_libdir}/*.so
+%{_libdir}/*.so.1
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/*.so
+%doc docs/*
+%doc ChangeLog.gz
 %{_includedir}/*
+
+%files examples
+%defattr(644,root,root,755)
+%doc examples/*
