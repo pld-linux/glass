@@ -1,15 +1,13 @@
 Summary:	GLASS - openGL Articulated Structure System
 Summary(pl):	GLASS - Biblioteka obs³ugi struktur 3D OpenGL
 Name:		glass
-Version:	1.1.3
+Version:	1.3.1
 Release:	1
 License:	GPL
 Group:		X11/Libraries
 Vendor:		Robert Cleaver Ancell <bob27@users.sourceforge.net>
 Source0:	http://dl.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
-Patch0:		%{name}-version.patch
-Patch1:		%{name}-examples-CFLAGS_for_glut.patch
-Patch2:		%{name}-LIBS.patch
+Patch0:		%{name}-LIBS.patch
 BuildRequires:	OpenGL-devel
 Requires:	OpenGL
 URL:		http://glass.sourceforge.net/
@@ -47,20 +45,18 @@ Pliki nag³ówkowe biblioteki GLASS.
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
-%patch2 -p1
 
 %build
 %{__make} all \
-	CFLAGS="%{rpmcflags} -fPIC -I%{_includedir} -DVERSION_STRING=\"\\\"%{version}\"\\\"" \
-	LIBS="-L%{_libdir} -lGL" \
+	CFLAGS="%{rpmcflags} -fPIC -I/usr/X11R6/include -DVERSION_STRING=\"\\\"%{version}\"\\\"" \
+	LIBS="-L/usr/X11R6/lib -lGL" \
 	CC=%{__cc}
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_includedir},%{_libdir},%{_examplesdir}/%{name}}
 
-install src/glass.h src/glass_types.h $RPM_BUILD_ROOT%{_includedir}
+install src/glass.h $RPM_BUILD_ROOT%{_includedir}
 install libglass.so* $RPM_BUILD_ROOT%{_libdir}
 
 ln -s libglass.so.%{version} $RPM_BUILD_ROOT%{_libdir}/libglass.so
