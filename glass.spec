@@ -4,18 +4,18 @@ Name:		glass
 Version:	1.1.3
 Release:	1
 License:	GPL
-Group:		Development/Libraries
-Group(de):	Entwicklung/Libraries
-Group(es):	Desarrollo/Bibliotecas
-Group(fr):	Development/Librairies
-Group(pl):	Programowanie/Biblioteki
-Group(pt_BR):	Desenvolvimento/Bibliotecas
-Group(ru):	Ú¡⁄“¡¬œ‘À¡/‚…¬Ã…œ‘≈À…
-Group(uk):	Úœ⁄“œ¬À¡/‚¶¬Ã¶œ‘≈À…
+Group:		Libraries
+Group(de):	Libraries
+Group(es):	Bibliotecas
+Group(fr):	Librairies
+Group(pl):	Biblioteki
+Group(pt_BR):	Bibliotecas
+Group(ru):	‚…¬Ã…œ‘≈À…
+Group(uk):	‚¶¬Ã¶œ‘≈À…
 Vendor:		Robert Cleaver Ancell <bob27@users.sourceforge.net>
-URL:		http://glass.sourceforge.net
 Source0:	http://download.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
 Patch0:		%{name}-version.patch
+URL:		http://glass.sourceforge.net
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -33,6 +33,25 @@ przesuniÍÊ) w aplikacjach 3D OpenGL. GLASS pozwala za≥adowaÊ,
 zmodyfikowaÊ i wy∂wietlaÊ te obiekty przy uøyciu minimalnej ilo∂ci
 wywo≥aÒ (co upraszcza kod).
 
+%package devel
+Summary:	GLASS development package
+Summary(pl):	Pakiet dla programistÛw GLASS
+Group:		Development/Libraries
+Group(de):	Entwicklung/Libraries
+Group(es):	Desarrollo/Bibliotecas
+Group(fr):	Development/Librairies
+Group(pl):	Programowanie/Biblioteki
+Group(pt_BR):	Desenvolvimento/Bibliotecas
+Group(ru):	Ú¡⁄“¡¬œ‘À¡/‚…¬Ã…œ‘≈À…
+Group(uk):	Úœ⁄“œ¬À¡/‚¶¬Ã¶œ‘≈À…
+Requires:	%{name} = %{version}
+
+%description devel
+GLASS header files.
+
+%description devel -l pl
+Pliki nag≥Ûwkowe biblioteki GLASS.
+
 %prep
 %setup -q
 %patch -p1
@@ -42,23 +61,25 @@ wywo≥aÒ (co upraszcza kod).
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_prefix}/local/include
-install -d $RPM_BUILD_ROOT%{_libdir}
-cp -f src/glass.h src/glass_types.h $RPM_BUILD_ROOT%{_prefix}/local/include
-rm -f $RPM_BUILD_ROOT%{_libdir}/libglass.* 
-cp -f libglass.so.* $RPM_BUILD_ROOT%{_libdir}
+install -d $RPM_BUILD_ROOT{%{_includedir},%{_libdir}}
 
-%post
-echo Rejestrowanie bibliotek...
-ln -fs /usr/lib/libglass.so.1 /usr/lib/libglass.so 
-/sbin/ldconfig
-echo Pliki nag≥Ûwkowe znajduj± siÍ w /usr/local/include
+install src/glass.h src/glass_types.h $RPM_BUILD_ROOT%{_includedir}
+install libglass.so* $RPM_BUILD_ROOT%{_libdir}
+
+gzip -9nf README TODO
 
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%post	-p /sbin/ldconfig
+%postun	-p /sbin/ldconfig
+
 %files
 %defattr(644,root,root,755)
-%doc README COPYING TODO
-%{_prefix}/local/include/*
-%{_libdir}/*
+%doc README.gz TODO.gz
+%attr(755,root,root) %{_libdir}/*.so.*.*
+
+%files devel
+%defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/*.so
+%{_includedir}/*
