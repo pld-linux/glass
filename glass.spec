@@ -1,45 +1,52 @@
-Summary: 	GLASS - openGL Articulated Structure System
-Name: 		glass
-Version: 	1.1.3
-Release: 	1
-License: 	GPL
+Summary:	GLASS - openGL Articulated Structure System
+Summary(pl):	GLASS - Biblioteka obs³ugi struktur 3D OpenGL
+Name:		glass
+Version:	1.1.3
+Release:	1
+License:	GPL
 Group:		Development/Libraries
 Group(de):	Entwicklung/Libraries
+Group(es):	Desarrollo/Bibliotecas
 Group(fr):	Development/Librairies
 Group(pl):	Programowanie/Biblioteki
+Group(pt_BR):	Desenvolvimento/Bibliotecas
+Group(ru):	òÁÚÒÁÂÏÔËÁ/âÉÂÌÉÏÔÅËÉ
+Group(uk):	òÏÚÒÏÂËÁ/â¦ÂÌ¦ÏÔÅËÉ
 Vendor:		Robert Cleaver Ancell <bob27@users.sourceforge.net>
-URL: 		http://glass.sourceforge.net
-Source: 	http://download.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
-Patch:		glass-version.patch
-BuildRoot: 	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+URL:		http://glass.sourceforge.net
+Source0:	http://download.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
+Patch0:		%{name}-version.patch
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
-GLASS is a 3D library, designed to make easy use of structured models (models,
-that are made up of components linked by basic transforms,for example, rotations
-and translations) in open GL applications. By using GLASS in an application,
-these models can be loaded, modified, and displayed using a minimum of function 
-calls.
+GLASS is a 3D library, designed to make easy use of structured models
+(models, that are made up of components linked by basic transforms,for
+example, rotations and translations) in open GL applications. By using
+GLASS in an application, these models can be loaded, modified, and
+displayed using a minimum of function calls.
 
 %description -l pl
-GLASS to biblioteka wspomagaj±ca projektowanie aplikacji 3D, stworzona aby
-upro¶ciæ u¿ycie modelu strukturalnego (modele, które sk³adaj± siê z po³±czonych
-prostymi transformacjami czê¶ci, np. obrotów lub przesuniêæ) w aplikacjach
-3D OpenGL. GLASS pozwala za³adowaæ, zmodyfikowaæ i wy¶wietlaæ te obiekty
-przy u¿yciu minimalnej ilo¶ci wywo³añ (co upraszcza kod).
+GLASS to biblioteka wspomagaj±ca projektowanie aplikacji 3D, stworzona
+aby upro¶ciæ u¿ycie modelu strukturalnego (modele, które sk³adaj± siê
+z po³±czonych prostymi transformacjami czê¶ci, np. obrotów lub
+przesuniêæ) w aplikacjach 3D OpenGL. GLASS pozwala za³adowaæ,
+zmodyfikowaæ i wy¶wietlaæ te obiekty przy u¿yciu minimalnej ilo¶ci
+wywo³añ (co upraszcza kod).
 
 %prep
 %setup -q
 %patch -p1
 
 %build
-make all
+%{__make} all
 
 %install
-mkdir -p $RPM_BUILD_ROOT/usr/local/include
-mkdir -p $RPM_BUILD_ROOT/usr/lib
-cp -f src/glass.h src/glass_types.h $RPM_BUILD_ROOT/usr/local/include
-rm -f $RPM_BUILD_ROOT/usr/lib/libglass.* 
-cp -f libglass.so.* $RPM_BUILD_ROOT/usr/lib
+rm -rf $RPM_BUILD_ROOT
+install -d $RPM_BUILD_ROOT%{_prefix}/local/include
+install -d $RPM_BUILD_ROOT%{_libdir}
+cp -f src/glass.h src/glass_types.h $RPM_BUILD_ROOT%{_prefix}/local/include
+rm -f $RPM_BUILD_ROOT%{_libdir}/libglass.* 
+cp -f libglass.so.* $RPM_BUILD_ROOT%{_libdir}
 
 %post
 echo Rejestrowanie bibliotek...
@@ -51,7 +58,7 @@ echo Pliki nag³ówkowe znajduj± siê w /usr/local/include
 rm -rf $RPM_BUILD_ROOT
 
 %files
-%defattr(-, root, root)
+%defattr(644,root,root,755)
 %doc README COPYING TODO
-/usr/local/include/*
-/usr/lib/*
+%{_prefix}/local/include/*
+%{_libdir}/*
