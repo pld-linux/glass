@@ -48,46 +48,27 @@ GLASS header files. Contains also tutorial and specifications.
 %description devel -l pl
 Pliki nag≥Ûwkowe biblioteki GLASS.
 
-
-%package examples
-Summary:	Examples of GLASS models.
-Summary(pl):	Przyk≥adowe modele GLASS
-Group:		Development
-Group(de):	Entwicklung
-Group(es):	Desarrollo
-Group(pl):	Programowanie
-Group(pt_BR):	Desenvolvimento
-Group(ru):	Ú¡⁄“¡¬œ‘À¡
-Group(uk):	Úœ⁄“œ¬À¡
-Requires:	%{name}-devel
-Requires:	glut-devel
-
-%description examples
-Sampe GLASS models to show howto use GLASS library.
-
-%description examples -l pl
-Przyk≥adowe modele GLASS pokazuj±ce stosowanie biblioteki GLASS.
-
 %prep
 %setup -q
 %patch0 -p1
 %patch1 -p1
 
 %build
-%{__make} all
+%{__make} all \
+	CFLAGS="%{rpmcflags} -I/usr/X11R6/include -DVERSION_STRING=\"%{version}\"" \
+	CC=%{__cc}
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_includedir},%{_libdir}}
+install -d $RPM_BUILD_ROOT{%{_includedir},%{_libdir},%{_exampledir}/%{name}}
 
 install src/glass.h src/glass_types.h $RPM_BUILD_ROOT%{_includedir}
 install libglass.so* $RPM_BUILD_ROOT%{_libdir}
 
-gzip -9nf README TODO ChangeLog
+ln -s libglass.so.%{version} $RPM_BUILD_ROOT%{_libdir}/libglass.so
+cp -ar examples/* $RPM_BUILD_ROOT%{_exampledir}/%{name}
 
-cd $RPM_BUILD_ROOT%{_libdir}
-ln -s libglass.so.%{version} libglass.so
-ln -s libglass.so.%{version} libglass.so.1
+gzip -9nf README TODO ChangeLog
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -98,16 +79,11 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc README.gz TODO.gz
-%attr(755,root,root) %{_libdir}/*.so.*.*
-%{_libdir}/*.so
-%{_libdir}/*.so.1
+%attr(755,root,root) %{_libdir}/lib*.so.*.*
 
 %files devel
 %defattr(644,root,root,755)
-%doc docs/*
-%doc ChangeLog.gz
+%doc docs/* %doc ChangeLog.gz
+%attr(755,root,root) %{_libdir}/lib*.so
 %{_includedir}/*
-
-%files examples
-%defattr(644,root,root,755)
-%doc examples/*
+%{_examplesdir}/%{name}
