@@ -13,9 +13,9 @@ Group(pt_BR):	Bibliotecas
 Group(ru):	Библиотеки
 Group(uk):	Б╕бл╕отеки
 Vendor:		Robert Cleaver Ancell <bob27@users.sourceforge.net>
-Source0:	http://download.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
+Source0:	ftp://ftp.sourceforge.net/pub/sourceforge/%{name}/%{name}-%{version}.tar.gz
 Patch0:		%{name}-version.patch
-URL:		http://glass.sourceforge.net
+URL:		http://glass.sourceforge.net/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
