@@ -68,8 +68,6 @@ install libglass.so* $RPM_BUILD_ROOT%{_libdir}
 ln -s libglass.so.%{version} $RPM_BUILD_ROOT%{_libdir}/libglass.so
 cp -ar examples/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}
 
-gzip -9nf README TODO ChangeLog
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -78,12 +76,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc README.gz TODO.gz
+%doc README TODO
 %attr(755,root,root) %{_libdir}/lib*.so.*.*
 
 %files devel
 %defattr(644,root,root,755)
-%doc docs/* ChangeLog.gz
+%doc docs/* ChangeLog
 %attr(755,root,root) %{_libdir}/lib*.so
 %{_includedir}/*
 %{_examplesdir}/%{name}
