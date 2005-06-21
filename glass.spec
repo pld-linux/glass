@@ -6,13 +6,13 @@ Release:	2
 License:	GPL
 Group:		X11/Libraries
 Vendor:		Robert Cleaver Ancell <bob27@users.sourceforge.net>
-Source0:	http://dl.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
+Source0:	http://dl.sourceforge.net/glass/%{name}-%{version}.tar.gz
 # Source0-md5:	bcde18e3ce0bebb19cf888d652f8b425
 Patch0:		%{name}-LIBS.patch
 Patch1:		%{name}-DESTDIR.patch
+URL:		http://glass.sourceforge.net/
 BuildRequires:	OpenGL-devel
 Requires:	OpenGL
-URL:		http://glass.sourceforge.net/
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define 	_noautoreqdep	libGL.so.1 libGLU.so.1
