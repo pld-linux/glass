@@ -5,7 +5,6 @@ Version:	1.3.1
 Release:	2
 License:	GPL
 Group:		X11/Libraries
-Vendor:		Robert Cleaver Ancell <bob27@users.sourceforge.net>
 Source0:	http://dl.sourceforge.net/glass/%{name}-%{version}.tar.gz
 # Source0-md5:	bcde18e3ce0bebb19cf888d652f8b425
 Patch0:		%{name}-LIBS.patch
@@ -64,7 +63,7 @@ install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 	INCLUDEDIR=%{_includedir}/glass \
 	LIBDIR=%{_libdir}
 
-cp -ar examples/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
+cp -a examples/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
 %clean
 rm -rf $RPM_BUILD_ROOT
