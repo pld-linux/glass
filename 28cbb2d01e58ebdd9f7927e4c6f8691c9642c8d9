@@ -1,0 +1,4 @@
+- merged exampels subpackage with devel,
+- add passing $RPM_OPT_FLAGS to CFLAGS and %{__cc} to CC,
+- adde -I/usr/X11R6/include to CFALAGS,
+- few simplifications.
