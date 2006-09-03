@@ -35,7 +35,7 @@ wywo³añ (co upraszcza kod).
 Summary:	GLASS development package
 Summary(pl):	Pakiet dla programistów GLASS
 Group:		X11/Development/Libraries
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 
 %description devel
 GLASS header files. Contains also tutorial and specifications.
