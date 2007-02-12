@@ -1,5 +1,5 @@
 Summary:	GLASS - openGL Articulated Structure System
-Summary(pl):	GLASS - Biblioteka obs³ugi struktur 3D OpenGL
+Summary(pl.UTF-8):   GLASS - Biblioteka obsÅ‚ugi struktur 3D OpenGL
 Name:		glass
 Version:	1.3.1
 Release:	2
@@ -23,25 +23,25 @@ example, rotations and translations) in open GL applications. By using
 GLASS in an application, these models can be loaded, modified, and
 displayed using a minimum of function calls.
 
-%description -l pl
-GLASS to biblioteka wspomagaj±ca projektowanie aplikacji 3D, stworzona
-aby upro¶ciæ u¿ycie modelu strukturalnego (modele, które sk³adaj± siê
-z po³±czonych prostymi transformacjami czê¶ci, np. obrotów lub
-przesuniêæ) w aplikacjach 3D OpenGL. GLASS pozwala za³adowaæ,
-zmodyfikowaæ i wy¶wietlaæ te obiekty przy u¿yciu minimalnej ilo¶ci
-wywo³añ (co upraszcza kod).
+%description -l pl.UTF-8
+GLASS to biblioteka wspomagajÄ…ca projektowanie aplikacji 3D, stworzona
+aby uproÅ›ciÄ‡ uÅ¼ycie modelu strukturalnego (modele, ktÃ³re skÅ‚adajÄ… siÄ™
+z poÅ‚Ä…czonych prostymi transformacjami czÄ™Å›ci, np. obrotÃ³w lub
+przesuniÄ™Ä‡) w aplikacjach 3D OpenGL. GLASS pozwala zaÅ‚adowaÄ‡,
+zmodyfikowaÄ‡ i wyÅ›wietlaÄ‡ te obiekty przy uÅ¼yciu minimalnej iloÅ›ci
+wywoÅ‚aÅ„ (co upraszcza kod).
 
 %package devel
 Summary:	GLASS development package
-Summary(pl):	Pakiet dla programistów GLASS
+Summary(pl.UTF-8):   Pakiet dla programistÃ³w GLASS
 Group:		X11/Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
 %description devel
 GLASS header files. Contains also tutorial and specifications.
 
-%description devel -l pl
-Pliki nag³ówkowe biblioteki GLASS.
+%description devel -l pl.UTF-8
+Pliki nagÅ‚Ã³wkowe biblioteki GLASS.
 
 %prep
 %setup -q
