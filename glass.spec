@@ -1,5 +1,5 @@
 Summary:	GLASS - openGL Articulated Structure System
-Summary(pl.UTF-8):   GLASS - Biblioteka obsługi struktur 3D OpenGL
+Summary(pl.UTF-8):	GLASS - Biblioteka obsługi struktur 3D OpenGL
 Name:		glass
 Version:	1.3.1
 Release:	2
@@ -33,7 +33,7 @@ wywołań (co upraszcza kod).
 
 %package devel
 Summary:	GLASS development package
-Summary(pl.UTF-8):   Pakiet dla programistów GLASS
+Summary(pl.UTF-8):	Pakiet dla programistów GLASS
 Group:		X11/Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 
