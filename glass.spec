@@ -65,6 +65,9 @@ install -d $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
 cp -a examples/* $RPM_BUILD_ROOT%{_examplesdir}/%{name}-%{version}
 
+cd $RPM_BUILD_ROOT%{_libdir}
+ln -sf libglass.so.*.*.* libglass.so.1
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -74,11 +77,12 @@ rm -rf $RPM_BUILD_ROOT
 %files
 %defattr(644,root,root,755)
 %doc ChangeLog README TODO
-%attr(755,root,root) %{_libdir}/lib*.so.*.*
+%attr(755,root,root) %{_libdir}/libglass.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libglass.so.1
 
 %files devel
 %defattr(644,root,root,755)
 %doc docs/*.html
-%attr(755,root,root) %{_libdir}/lib*.so
+%attr(755,root,root) %{_libdir}/libglass.so
 %{_includedir}/glass
 %{_examplesdir}/%{name}-%{version}
